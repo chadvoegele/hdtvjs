@@ -1,0 +1,23 @@
+{
+  "name": "streams",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Chad Voegele <cavoegele@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "winston": "^3.2.1"
+  },
+  "scripts": {
+    "server": "node src/server/index.js",
+    "lint": "eslint  .",
+    "test": "lab"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
