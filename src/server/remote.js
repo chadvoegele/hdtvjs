@@ -60,6 +60,7 @@ M.router.get('/', middleware.logReq, middleware.setNoCache, async function(req, 
       guide = await hdhr.getGuide();
     } catch (e) {
       logger.error(`error getting guide ${e}`);
+      logger.error(e);
       guide = null;
     }
     const pageItems = lineup.map((item) => {

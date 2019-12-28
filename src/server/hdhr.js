@@ -16,8 +16,13 @@ M.getLineup = async function() {
 };
 
 M.getGuide = async function() {
-  const discoverUrl = 'http://ipv4-api.hdhomerun.com/discover';
-  const discoverRes = await request(discoverUrl);
+  const discoverUrlOptions = {
+    uri: 'http://ipv4-api.hdhomerun.com/discover',
+    headers: {
+      'User-Agent': '',
+    },
+  };
+  const discoverRes = await request(discoverUrlOptions);
   const discover = JSON.parse(discoverRes);
   if (discover.length == 0) {
     throw new Error('Did not find any HDHR devices during discover!');
@@ -26,8 +31,13 @@ M.getGuide = async function() {
   const localDiscoverRes = await request(localDiscoverUrl);
   const localDiscover = JSON.parse(localDiscoverRes);
   const deviceAuth = localDiscover.DeviceAuth;
-  const guideUrl = `http://my.hdhomerun.com/api/guide.php?DeviceAuth=${deviceAuth}`;
-  const guideRes = await request(guideUrl);
+  const guideUrlOptions = {
+    uri: `http://api.hdhomerun.com/api/guide.php?DeviceAuth=${deviceAuth}`,
+    headers: {
+      'User-Agent': '',
+    },
+  };
+  const guideRes = await request(guideUrlOptions);
   const guide = JSON.parse(guideRes);
   return guide;
 };
