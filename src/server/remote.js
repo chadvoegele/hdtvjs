@@ -45,8 +45,8 @@ M.router.get('/', middleware.logReq, middleware.setNoCache, async function(req, 
     const controlStatus = control.getStatus();
     if (controlStatus.isStreaming) {
       logger.debug('Currently streaming. Creating stop stream page.');
-      const stopStream = `<a href='/control/stop'>Stop stream</a>`;
-      const urlPage = `Currently streaming: <a href='/tv'>${controlStatus.url}</a>`;
+      const stopStream = `<a href='control/stop'>Stop stream</a>`;
+      const urlPage = `Currently streaming: <a href='tv'>${controlStatus.url}</a>`;
       const innerPage = `<table><tr><td>${stopStream}</td></tr><tr><td>${urlPage}</td></tr></table>`;
       const page = `<html><body>${innerPage}</body></html>`;
       res.send(page);
@@ -66,7 +66,7 @@ M.router.get('/', middleware.logReq, middleware.setNoCache, async function(req, 
     const pageItems = lineup.map((item) => {
       const number = `${item.GuideNumber}`;
       const name = `${item.GuideName}`;
-      const url = `<a href='/control/start?url=${encodeURIComponent(item.URL)}'>${item.URL}</a>`;
+      const url = `<a href='control/start?url=${encodeURIComponent(item.URL)}'>${item.URL}</a>`;
       const guideForOneChannel = getGuideForOneChannel(guide, number);
       const guideHTML = getGuideHTMLForOneChannel(guideForOneChannel);
       return `<tr><td>${number}</td><td>${name}</td><td>${url}</td><td>${guideHTML}</td></tr>`;

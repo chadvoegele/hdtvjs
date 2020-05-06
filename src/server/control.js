@@ -48,7 +48,7 @@ M.startStream = async function(url) {
   logger.debug(`control starting stream`);
   await M.prepareDirectory();
 
-  const streamsRoot = `/tv/`;
+  const streamsRoot = ``;
   const hlsCommand = `ffmpeg`;
   const hlsCommandArgs = [
     `-re`, `-i`, `${url}`, `-c:v`, `copy`, `-c:a`, `mp3`,
@@ -108,10 +108,10 @@ M.router = express.Router();
 M.router.get('/start', middleware.logReq, async function(req, res) {
   const url = req.query.url + '?transcode=mobile';
   M.startStream(url);
-  res.redirect('/tv');
+  res.redirect('../tv');
 });
 
 M.router.get('/stop', middleware.logReq, async function(req, res) {
   M.stopStream();
-  res.redirect('/');
+  res.redirect('../');
 });
