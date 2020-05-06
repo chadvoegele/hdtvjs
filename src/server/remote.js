@@ -46,7 +46,7 @@ M.router.get('/', middleware.logReq, middleware.setNoCache, async function(req, 
     if (controlStatus.isStreaming) {
       logger.debug('Currently streaming. Creating stop stream page.');
       const stopStream = `<a href='control/stop'>Stop stream</a>`;
-      const urlPage = `Currently streaming: <a href='tv'>${controlStatus.url}</a>`;
+      const urlPage = `Currently streaming: <a href='screen'>${controlStatus.url}</a>`;
       const innerPage = `<table><tr><td>${stopStream}</td></tr><tr><td>${urlPage}</td></tr></table>`;
       const page = `<html><body>${innerPage}</body></html>`;
       res.send(page);

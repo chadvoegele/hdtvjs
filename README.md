@@ -13,5 +13,5 @@ Path: /
 
 TV
 
-Path: /tv
+Path: /screen
 ![TV](https://user-images.githubusercontent.com/7339774/68945602-9ae4d200-0765-11ea-8d2d-0a465b8155d2.jpg)

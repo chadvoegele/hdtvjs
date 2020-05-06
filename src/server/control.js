@@ -108,7 +108,7 @@ M.router = express.Router();
 M.router.get('/start', middleware.logReq, async function(req, res) {
   const url = req.query.url + '?transcode=mobile';
   M.startStream(url);
-  res.redirect('../tv');
+  res.redirect('../screen');
 });
 
 M.router.get('/stop', middleware.logReq, async function(req, res) {

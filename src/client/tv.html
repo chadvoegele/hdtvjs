@@ -4,13 +4,13 @@
     <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
   </head>
   <body>
-    <video id="video" controls src="tv/stream.m3u8">
+    <video id="video" controls src="screen/stream.m3u8">
     </video>
     <script>
 if(Hls.isSupported()) {
   var video = document.getElementById('video');
   var hls = new Hls({liveMaxLatencyDurationCount: 5, liveSyncDurationCount: 2});
-  hls.loadSource('tv/stream.m3u8');
+  hls.loadSource('screen/stream.m3u8');
   hls.attachMedia(video);
   hls.on(Hls.Events.MANIFEST_PARSED,function() {
     video.play();

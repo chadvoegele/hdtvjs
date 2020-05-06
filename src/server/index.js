@@ -1,6 +1,6 @@
 const express = require('express');
 const control = require('./control');
-const tv = require('./tv');
+const screen = require('./screen');
 const remote = require('./remote');
 
 const app = express();
@@ -11,7 +11,7 @@ app.get('/healthcheck', function(req, res) {
 
 app.use('/control', control.router);
 
-app.use('/tv', tv.router);
+app.use('/screen', screen.router);
 
 app.use('/', remote.router);
 
