@@ -1,7 +1,8 @@
 const express = require('express');
+const args = require('./args');
 const control = require('./control');
-const screen = require('./screen');
 const remote = require('./remote');
+const screen = require('./screen');
 
 const app = express();
 
@@ -15,4 +16,4 @@ app.use('/screen', screen.router);
 
 app.use('/', remote.router);
 
-app.listen(9000);
+app.listen(args.port, args.host);
