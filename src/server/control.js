@@ -87,7 +87,7 @@ M.extendStopTimeout = function() {
   logger.debug(`control extending stop timeout ${state.stopStreamTimeout}`);
   state.stopStreamTimeout && clearTimeout(state.stopStreamTimeout);
   state.stopStreamTimeout = setTimeout(() => {
-    logger.info; ('control stopping stream from timeout');
+    logger.info('control stopping stream from timeout');
     M.stopStream();
   }, STOP_DELAY);
 };

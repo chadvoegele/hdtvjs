@@ -4,18 +4,75 @@
     <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
   </head>
   <body>
-    <video id="video" controls src="screen/stream.m3u8">
-    </video>
+    <video id="video" controls></video>
     <script>
-if(Hls.isSupported()) {
+function playVideo() {
+  console.log('Playing video')
   var video = document.getElementById('video');
   var hls = new Hls({liveMaxLatencyDurationCount: 5, liveSyncDurationCount: 2});
   hls.loadSource('screen/stream.m3u8');
   hls.attachMedia(video);
+  hls.on(Hls.Events.ERROR, function (event, data) {
+    if (data.fatal) {
+      switch (data.type) {
+        case Hls.ErrorTypes.MEDIA_ERROR:
+          console.log('fatal media error encountered, try to recover');
+          hls.recoverMediaError();
+          break;
+        case Hls.ErrorTypes.NETWORK_ERROR:
+          console.error('fatal network error encountered', data);
+          break;
+        default:
+          hls.destroy();
+          break;
+      }
+    }
+  });
   hls.on(Hls.Events.MANIFEST_PARSED,function() {
     video.play();
   });
 }
+
+function tryGetPlaylist(callback) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "screen/stream.m3u8");
+    xhr.onload = () => {
+      if (xhr.readyState == 4) {
+        resolve(xhr.status);
+      } else {
+        resolve(-1);
+      }
+    };
+    xhr.send();
+  });
+}
+
+async function waitForPlaylist(counter) {
+  return new Promise(async (resolve, reject) => {
+    let status = await tryGetPlaylist();
+    if (status == 404 && counter < 20) {
+      counter = counter + 1;
+      setTimeout(() => {resolve(waitForPlaylist(counter));}, 1000);
+    }
+    else if (status == 404) {
+      reject();
+    }
+
+    if (status == 200) {
+      resolve();
+    }
+  });
+}
+
+async function main() {
+  if(Hls.isSupported()) {
+    await waitForPlaylist(0);
+    playVideo();
+  }
+}
+
+main()
     </script>
   </body>
 </html>
