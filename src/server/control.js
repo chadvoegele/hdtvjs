@@ -6,7 +6,7 @@ const {logger} = require('./logger');
 
 const M = module.exports = {};
 
-M.SERVE_DIR = `/tmp/streams_wwwroot`;
+M.SERVE_DIR = `/dev/shm/streams_wwwroot`;
 
 const STOP_DELAY = 60000;
 
