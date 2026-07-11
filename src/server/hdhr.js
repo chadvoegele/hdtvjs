@@ -32,7 +32,7 @@ M.getGuide = async function() {
   const localDiscover = JSON.parse(localDiscoverRes);
   const deviceAuth = localDiscover.DeviceAuth;
   const guideUrlOptions = {
-    uri: `http://api.hdhomerun.com/api/guide.php?DeviceAuth=${deviceAuth}`,
+    uri: `https://api.hdhomerun.com/api/guide.php?DeviceAuth=${deviceAuth}`,
     headers: {
       'User-Agent': '',
     },
